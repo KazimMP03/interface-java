@@ -7,6 +7,7 @@ import java.util.Scanner;
 import entities.Contract;
 import entities.Installment;
 import services.ContractService;
+import services.PaypalService;
 
 public class Program {
     public static void main(String[] args) throws Exception {
@@ -27,9 +28,10 @@ public class Program {
         System.out.print("Entre com o número de parcelas: ");
         int n = sc.nextInt();
 
-        ContractService contractService = new ContractService(null);
+        PaypalService paypalService = new PaypalService();
+        ContractService contractService = new ContractService(paypalService);
 
-        ContractService.processContract(contract, n);
+        contractService.processContract(contract, n);
 
         System.out.println("Parcelas: ");
         for (Installment installment : contract.getInstallments()) {
