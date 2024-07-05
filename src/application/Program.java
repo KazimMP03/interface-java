@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import entities.Contract;
+import entities.Installment;
+import services.ContractService;
 
 public class Program {
     public static void main(String[] args) throws Exception {
@@ -24,6 +26,15 @@ public class Program {
 
         System.out.print("Entre com o número de parcelas: ");
         int n = sc.nextInt();
+
+        ContractService contractService = new ContractService(null);
+
+        ContractService.processContract(contract, n);
+
+        System.out.println("Parcelas: ");
+        for (Installment installment : contract.getInstallments()) {
+            System.out.println(installment);
+        }
         
         sc.close();
     }
